@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+  background-color: #f9f9f9;
+}
+
+.active {
+  @apply text-[#ea3030];
+}
+
+.active#central {
+  @apply bg-[#ea3030] text-white;
+}
