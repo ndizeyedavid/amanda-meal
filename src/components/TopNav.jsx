@@ -1,7 +1,11 @@
 import { Link, NavLink } from "react-router-dom"
 import Logo from "/assets/images/logo/logo.png"
+import { useState } from "react"
 
 export default function TopNav({ variation, title }) {
+
+    const [open, setOpen] = useState(false)
+
     return (
 
         <>
@@ -17,7 +21,31 @@ export default function TopNav({ variation, title }) {
 
                     <img src={Logo} alt="Logo" className="w-[150px] h-[80px] object-contain" />
 
-                    <div className="w-2 h-2 p-6 bg-red-500 rounded-full" style={{ backgroundImage: "url('/assets/images/users/1.png')", backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
+                    <div className="relative">
+                        <div onClick={() => setOpen(!open)} className="w-2 h-2 p-6 border-2 rounded-full shadow-lg hover:border-red-500" style={{ backgroundImage: "url('/assets/images/users/1.png')", backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
+
+                        {open ?
+                            <div className="absolute right-[-2px] text-white font-semibold top-[60px] overflow-hidden rounded flex flex-col bg-red-400 w-[150px]">
+                                <Link className="p-2 text-lg transition-all border-b-2 hover:bg-red-500" to="">
+                                    {/* icon here */}
+                                    Settings
+                                </Link>
+                                <Link className="p-2 text-lg transition-all border-b-2 hover:bg-red-500" to="">
+                                    {/* icon here */}
+                                    Privacy Policy
+                                </Link>
+                                <Link className="p-2 text-lg transition-all hover:bg-red-500" to="">
+                                    {/* icon here */}
+                                    Logout
+                                </Link>
+                            </div>
+
+                            :
+
+                            null
+                        }
+                    </div>
+
                 </div>
 
                 :

@@ -1,5 +1,10 @@
+import { useState } from "react";
+import OrderOverlay from "./OrderOverlay";
 
 export default function SingleProduct({ size, fav, image, title, price }) {
+
+    const [open, setOpen] = useState(false);
+
     return (
         <div className="relative w-full h-fit bg-white rounded-lg shadow-[0px_2px_2px_0px_rgba(0,0,0,0.15)] overflow-hidden">
 
@@ -15,11 +20,14 @@ export default function SingleProduct({ size, fav, image, title, price }) {
                 <span className={`leading-none text-black ${size == "search" ? "text-[21px] font-semibold" : "font-medium"}`}>{price} RWF</span>
 
                 <div className="absolute flex items-end justify-end -right-2 -bottom-3">
-                    <button className="flex items-start justify-start w-[55px] h-[55px] pr-8 pl-3 bg-[#ffde16] rounded-xl shadow-md">
+                    <button onClick={() => setOpen(true)} className="flex items-start justify-start w-[55px] h-[55px] pr-8 pl-3 bg-[#ffde16] rounded-xl shadow-md">
                         <i className="bi bi-basket text-[25px]"></i>
                     </button>
                 </div>
             </div>
+
+            {/* Order overlay */}
+            {open ? <OrderOverlay title={title} unitPrice={price} close={() => setOpen(false)} /> : null}
 
         </div>
     )
