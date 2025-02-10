@@ -1,19 +1,35 @@
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import Logo from "/assets/images/logo/logo.png"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import pb from "../utils/pocketbase"
 
-export default function TopNav({ variation, title }) {
+export default function TopNav({ refreshCart, variation, title }) {
     const navigate = useNavigate();
 
     const [open, setOpen] = useState(false)
-
+    const [orderCount, setOrderCount] = useState(0);
     function handleLogout() {
         if (confirm("Do you want to logout?")) {
             pb.authStore.clear();
             navigate("/start");
         }
     }
+
+    useEffect(() => {
+        async function fetch_data() {
+            try {
+                const cart_orders = await pb.collection("orders").getFullList({
+                    filter: `user_id='${pb.authStore.record.id}' && checked_out = false`
+
+                });
+                setOrderCount(cart_orders.length);
+            } catch (err) {
+                console.error(err.message)
+            }
+        }
+
+        fetch_data()
+    }, [refreshCart])
 
     return (
 
@@ -25,7 +41,7 @@ export default function TopNav({ variation, title }) {
                     {/* Menu */}
                     <Link to="/confirm/order" className="relative flex items-center justify-center w-2 h-2 p-6 rounded-full shadow-lg">
                         <i className="bi bi-basket text-[30px]"></i>
-                        <span className="absolute bg-[#ff94a8] -right-2.5 -top-1 w-[20px] h-[20px] rounded-full flex items-center justify-center p-3 font-semibold">2</span>
+                        {orderCount != 0 && <span className="absolute bg-[#ff94a8] -right-2.5 -top-1 w-[20px] h-[20px] rounded-full flex items-center justify-center p-3 font-semibold">{orderCount}</span>}
                     </Link>
 
                     <img src={Logo} alt="Logo" className="w-[150px] h-[80px] object-contain" />

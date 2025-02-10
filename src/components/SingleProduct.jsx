@@ -1,19 +1,21 @@
 import { useState } from "react";
 import OrderOverlay from "./OrderOverlay";
 
-export default function SingleProduct({ size, fav, image, title, price }) {
+export default function SingleProduct({ id, size, fav, image, title, price, setRefreshCart }) {
 
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="relative w-full h-fit bg-white rounded-lg shadow-[0px_2px_2px_0px_rgba(0,0,0,0.15)] overflow-hidden">
+        <div className="relative w-full h-fit bg-white rounded-lg shadow-[0px_2px_2px_0px_rgba(0,0,0,0.25)] overflow-hidden">
 
             {/* Add to favourite */}
-            <button className="absolute bg-[#ff94a8] w-[70px] flex items-center justify-end px-5 h-[40px] left-[-18px] top-[0px] rounded-[0px_0px_20px_0]">
-                <i className={`text-[20px] bi bi-heart${fav ? "-fill text-[#ea3030]" : " text-black"}`}></i>
-            </button>
+            {fav &&
+                <button className="absolute bg-[#ff94a8] w-[70px] flex items-center justify-end px-5 h-[40px] left-[-18px] top-[0px] rounded-[0px_0px_20px_0]">
+                    <i className={`text-[20px] bi bi-heart${fav ? "-fill text-[#ea3030]" : " text-black"}`}></i>
+                </button>
+            }
 
-            <img src={image} className="w-full h-[196px] object-cover rounded-lg" alt="single Food card" />
+            <img src={image} className="w-full h-[196px] object-cover rounded-lg" alt={image + " Image"} />
 
             <div className="relative flex flex-col gap-2 p-2 pb-7">
                 <h3 className={`leading-tight text-black ${size == "search" ? "text-[22px] font-bold" : "font-medium text-base"}`}>{title}</h3>
@@ -27,7 +29,7 @@ export default function SingleProduct({ size, fav, image, title, price }) {
             </div>
 
             {/* Order overlay */}
-            {open ? <OrderOverlay title={title} unitPrice={price} close={() => setOpen(false)} /> : null}
+            {open ? <OrderOverlay id={id} title={title} unitPrice={price} close={() => setOpen(false)} setRefreshCart={setRefreshCart} /> : null}
 
         </div>
     )
