@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import IsLoggedIn from "../utils/sessionVerifier"
 
 function Icon({ name }) {
     return (
@@ -9,6 +10,9 @@ function Icon({ name }) {
 }
 
 export default function BottomNav() {
+
+    IsLoggedIn();
+
     return (
         <div className="fixed bottom-0 flex items-center justify-around w-full h-[76px] bg-white shadow-[0px_-1px_1px_0px_rgba(0,0,0,0.1)]">
             {/* single link */}

@@ -1,10 +1,19 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import Logo from "/assets/images/logo/logo.png"
 import { useState } from "react"
+import pb from "../utils/pocketbase"
 
 export default function TopNav({ variation, title }) {
+    const navigate = useNavigate();
 
     const [open, setOpen] = useState(false)
+
+    function handleLogout() {
+        if (confirm("Do you want to logout?")) {
+            pb.authStore.clear();
+            navigate("/start");
+        }
+    }
 
     return (
 
@@ -24,26 +33,25 @@ export default function TopNav({ variation, title }) {
                     <div className="relative">
                         <div onClick={() => setOpen(!open)} className="w-2 h-2 p-6 border-2 rounded-full shadow-lg hover:border-red-500" style={{ backgroundImage: "url('/assets/images/users/1.png')", backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
 
-                        {open ?
-                            <div className="absolute right-[-2px] text-white font-semibold top-[60px] overflow-hidden rounded flex flex-col bg-red-400 w-[150px]">
-                                <Link className="p-2 text-lg transition-all border-b-2 hover:bg-red-500" to="">
-                                    {/* icon here */}
+                        {open &&
+                            <div className="absolute right-0 z-50 w-48 py-2 mt-2 bg-white rounded-lg shadow-xl">
+                                <div className="px-4 py-3 text-center border-b">
+                                    <p className="text-sm font-semibold">{"user_" + pb.authStore.record.id}</p>
+                                    <p className="text-xs text-gray-500">{pb.authStore.record.email}</p>
+                                </div>
+                                <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                                     Settings
                                 </Link>
-                                <Link className="p-2 text-lg transition-all border-b-2 hover:bg-red-500" to="">
-                                    {/* icon here */}
-                                    Privacy Policy
+                                <Link to="/feedback" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                    Feedback
                                 </Link>
-                                <Link className="p-2 text-lg transition-all hover:bg-red-500" to="">
-                                    {/* icon here */}
-                                    Logout
-                                </Link>
-                            </div>
-
-                            :
-
-                            null
-                        }
+                                <div className="border-t">
+                                    <button onClick={() => handleLogout()} className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-50">
+                                        {/* <button className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-50"> */}
+                                        Sign out
+                                    </button>
+                                </div>
+                            </div>}
                     </div>
 
                 </div>
