@@ -64,7 +64,7 @@ export default function Home() {
             <PromoContainer />
 
             {/* Deal of the day */}
-            <ContentRedirecter />
+            {/* <ContentRedirecter /> */}
 
             {/* products */}
             <section className='w-[95%] mx-auto mt-[35px] mb-[100px]'>
