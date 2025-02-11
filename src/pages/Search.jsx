@@ -5,12 +5,18 @@ import SearchBar from '../components/SearchBar'
 import SingleProduct from '../components/SingleProduct'
 import pb from '../utils/pocketbase'
 import toast, { Toaster } from 'react-hot-toast'
-import { Loader, Loader2 } from 'lucide-react'
+import { Loader } from 'lucide-react'
 import Empty from '../components/Empty'
 
 export default function Search() {
 
-    const [search, setSearch] = useState("");
+    let search_query = "";
+    if (window.location.href.split("?")[1] != undefined) {
+        search_query = window.location.href.split("?")[1].split("=")[1] || "";
+    }
+
+
+    const [search, setSearch] = useState(search_query);
     const [products, setProducts] = useState([]);
     const [refreshCart, setRefreshCart] = useState([]);
     const [loading, setLoading] = useState(false);

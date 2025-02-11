@@ -41,10 +41,10 @@ function Filter() {
             {/* circular filters */}
             <div className='flex w-[95%] mx-auto mt-[35px] justify-between'>
                 {/* single filter */}
-                <SingleFilter path="/filter/food" imgae="/assets/images/filters/food.jpg" text="Food" />
-                <SingleFilter path="/filter/snacks" imgae="/assets/images/filters/snacks.jpg" text="Snacks" />
-                <SingleFilter path="/filter/drinks" imgae="/assets/images/filters/beverage.webp" text="Beverages" />
-                <SingleFilter path="/filter/fruits" imgae="/assets/images/filters/fruits.jpg" text="fruits" />
+                <SingleFilter active={category == "food"} path="/filter/food" imgae="/assets/images/filters/food.jpg" text="Food" />
+                <SingleFilter active={category == "snacks"} path="/filter/snacks" imgae="/assets/images/filters/snacks.jpg" text="Snacks" />
+                <SingleFilter active={category == "drinks"} path="/filter/drinks" imgae="/assets/images/filters/beverage.webp" text="Beverages" />
+                <SingleFilter active={category == "fruits"} path="/filter/fruits" imgae="/assets/images/filters/fruits.jpg" text="fruits" />
             </div>
 
             {/* <PromoContainer /> */}

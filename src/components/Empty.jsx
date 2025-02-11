@@ -13,7 +13,7 @@ export default function Empty({ title, text }) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M9 21V3m6 18V3" />
             </svg>
             <p className="mt-4 text-lg font-semibold text-gray-600">{title}</p>
-            <p className="text-sm text-gray-500">{text}</p>
+            <p className="text-sm text-center text-gray-500">{text}</p>
         </div>
     )
 }

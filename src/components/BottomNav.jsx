@@ -14,7 +14,7 @@ export default function BottomNav() {
     IsLoggedIn();
 
     return (
-        <div className="fixed bottom-0 flex items-center justify-around w-full h-[76px] bg-white shadow-[0px_-1px_1px_0px_rgba(0,0,0,0.1)]">
+        <div className="fixed bottom-[-1px] flex items-center justify-around w-full h-[76px] bg-white shadow-[0px_-1px_1px_0px_rgba(0,0,0,0.1)]">
             {/* single link */}
             <NavLink to="/" className="flex flex-col items-center justify-center text-center gap-[2px]">
                 <Icon name="house-door" />
