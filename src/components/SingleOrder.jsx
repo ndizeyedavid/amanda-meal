@@ -47,7 +47,7 @@ export default function SingleOrder({ id, img, title, status, quantity, price, s
 
             <div className='flex items-center justify-between'>
                 <span className='text-lg font-medium leading-snug text-black'>Total Order ({quantity}):</span>
-                <span className='text-xl font-bold leading-snug text-right text-black'>{price} RWF</span>
+                <span className='text-xl font-bold leading-snug text-right text-black'>{price.toLocaleString()} RWF</span>
             </div>
             <button className="px-5 py-2 rounded-lg font-semibold text-[20px] bg-blue-400 hover:bg-blue-600 ">Track</button>
 

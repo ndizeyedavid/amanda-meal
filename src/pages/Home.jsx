@@ -9,18 +9,35 @@ import ContentRedirecter from '../components/ContentRedirecter'
 import SingleProduct from '../components/SingleProduct'
 import pb from '../utils/pocketbase'
 import { Toaster } from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
 
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
+    const [groupedProducts, setGroupedProducts] = useState({});
     const [refreshCart, setRefreshCart] = useState(0)
 
     useEffect(() => {
         async function fetch_data() {
-            const fetch_products = await pb.collection("products").getFullList();
+            const fetch_products = await pb.collection("products").getFullList({
+                filter: "available = true"
+            });
 
-            setProducts(fetch_products);
-            // console.log(fetch_products)
+            // Group products by category attribute
+            const groupedProducts = fetch_products.reduce((acc, product) => {
+                const categoryName = product.product_category || "Uncategorized"; // Default if no category
+
+                if (!acc[categoryName]) {
+                    acc[categoryName] = [];
+                }
+
+                acc[categoryName].push(product);
+                return acc;
+            }, {});
+
+            setGroupedProducts(groupedProducts);
+            // console.log(groupedProducts);
+
         }
 
         fetch_data();
@@ -38,7 +55,6 @@ export default function Home() {
             {/* circular filters */}
             <div className='flex w-[95%] mx-auto mt-[35px] justify-between'>
                 {/* single filter */}
-                <SingleFilter imgae="/assets/images/filters/drinks.webp" text="Drinks" />
                 <SingleFilter imgae="/assets/images/filters/food.jpg" text="Food" />
                 <SingleFilter imgae="/assets/images/filters/snacks.jpg" text="Snacks" />
                 <SingleFilter imgae="/assets/images/filters/beverage.webp" text="Beverages" />
@@ -51,12 +67,28 @@ export default function Home() {
             <ContentRedirecter />
 
             {/* products */}
-            <div className='w-[95%] mx-auto mt-[35px] grid grid-cols-2 gap-y-5 gap-x-3 mb-[100px]'>
-                {products.map((data, index) => (
-                    <SingleProduct id={data.id} setRefreshCart={setRefreshCart} key={index} title={data.product_name} price={data.product_price} image={pb.files.getURL(data, data.product_image)} />
-                ))}
+            <section className='w-[95%] mx-auto mt-[35px] mb-[100px]'>
 
-            </div>
+                {Object.keys(groupedProducts).length === 0 ? (
+                    <p>Loading...</p>
+                ) : (
+                    Object.entries(groupedProducts).map(([category, products]) => (
+                        <div key={products.id} className='my-10'>
+
+                            <div className='flex items-center justify-between'>
+                                <h3 className='mb-4 text-3xl font-bold'>{category}</h3>
+                                <Link to={"/" + category} className='text-[#ff627f] text-xl'>See More</Link>
+                            </div>
+
+                            <div className='grid grid-cols-2 gap-y-5 gap-x-3'>
+                                {products.map((data, index) => (
+                                    <SingleProduct key={index} id={data.id} setRefreshCart={setRefreshCart} title={data.product_name} price={data.product_price} image={pb.files.getURL(data, data.product_image)} />
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                )}
+            </section>
 
 
             <BottomNav />

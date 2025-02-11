@@ -18,8 +18,8 @@ export default function SingleProduct({ id, size, fav, image, title, price, setR
             <img src={image} className="w-full h-[196px] object-cover rounded-lg" alt={image + " Image"} />
 
             <div className="relative flex flex-col gap-2 p-2 pb-7">
-                <h3 className={`leading-tight text-black ${size == "search" ? "text-[22px] font-bold" : "font-medium text-base"}`}>{title}</h3>
-                <span className={`leading-none text-black ${size == "search" ? "text-[21px] font-semibold" : "font-medium"}`}>{price} RWF</span>
+                <h3 className={`leading-tight text-black ${size == "search" ? "text-[22px] font-bold" : "font-bold text-2xl"}`}>{title}</h3>
+                <span className={`leading-none text-black ${size == "search" ? "text-[21px] font-semibold" : "font-medium text-lg"}`}>{price.toLocaleString()} RWF</span>
 
                 <div className="absolute flex items-end justify-end -right-2 -bottom-3">
                     <button onClick={() => setOpen(true)} className="flex items-start justify-start w-[55px] h-[55px] pr-8 pl-3 bg-[#ffde16] rounded-xl shadow-md">
