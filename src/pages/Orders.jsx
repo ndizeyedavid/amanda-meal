@@ -3,6 +3,7 @@ import BottomNav from "../components/BottomNav";
 import SingleOrder from "../components/SingleOrder";
 import TopNav from "../components/TopNav";
 import pb from "../utils/pocketbase";
+import Empty from "../components/Empty";
 
 export default function Orders() {
 
@@ -26,6 +27,7 @@ export default function Orders() {
             <TopNav variation="simple" title="Orders" />
 
             <div className="mt-[35px] flex flex-col gap-5 mb-[150px]">
+                {orders.length === 0 && <Empty title="No items purchased yet" text="Check your cart and proceed to checkout" />}
                 {orders.map((data, index) => (
                     <SingleOrder key={index} setDummy={setDummy} id={data.id} img={pb.files.getURL(data.expand.order_id.expand.product_id[0], data.expand.order_id.expand.product_id[0].product_image)} title={data.expand.order_id.expand.product_id[0].product_name} status={data.status} quantity={data.expand.order_id.quantity} price={data.expand.order_id.price} />
                 ))}

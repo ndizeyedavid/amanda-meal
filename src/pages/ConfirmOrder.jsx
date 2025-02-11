@@ -6,6 +6,7 @@ import SingleCheckout from '../components/SingleCheckout'
 import pb from '../utils/pocketbase'
 import { data } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
+import Empty from '../components/Empty'
 
 export default function ConfirmOrder() {
 
@@ -88,6 +89,7 @@ export default function ConfirmOrder() {
             {/* shopping list */}
             <div className='flex flex-col gap-[10px] w-[95%] mx-auto mt-[35px]'>
                 <h3 className='flex items-center gap-2 text-xl font-semibold leading-snug text-black'>Shopping List</h3>
+                {orders.length === 0 && <Empty title="Cart empty" text="Try adding menu items to cart" />}
                 {orders.map((data, index) => (
                     <SingleCheckout key={index} img={pb.files.getURL(data.expand.product_id[0], data.expand.product_id[0].product_image)} title={data.expand.product_id[0].product_name} price={data.expand.product_id[0].product_price} quantity={data.quantity} total={data.price} />
                 ))}
@@ -101,7 +103,7 @@ export default function ConfirmOrder() {
                     <span className='text-black font-bold text-[23px]'>{orderTotal} RWF</span>
                 </div>
 
-                <button onClick={() => submitOrder()} className='w-[150px] h-12 text-center text-white text-[20px] font-semibold bg-[#f73658] rounded-[5px]'>Checkout</button>
+                <button onClick={() => submitOrder()} disabled={orders.length === 0} className='w-[150px] h-12 text-center text-white text-[20px] font-semibold bg-[#f73658] rounded-[5px]'>Checkout</button>
             </div>
 
 

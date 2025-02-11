@@ -31,6 +31,14 @@ export default function TopNav({ refreshCart, variation, title }) {
         fetch_data()
     }, [refreshCart])
 
+    function getUname() {
+        if (!pb.authStore.record.fname) {
+            return "user_" + pb.authStore.record.id;
+        } else {
+            return pb.authStore.record.fname + " " + pb.authStore.record.lname
+        }
+    }
+
     return (
 
         <>
@@ -52,7 +60,7 @@ export default function TopNav({ refreshCart, variation, title }) {
                         {open &&
                             <div className="absolute right-0 z-50 w-48 py-2 mt-2 bg-white rounded-lg shadow-xl">
                                 <div className="px-4 py-3 text-center border-b">
-                                    <p className="text-sm font-semibold">{"user_" + pb.authStore.record.id}</p>
+                                    <p className="text-sm font-semibold">{getUname()}</p>
                                     <p className="text-xs text-gray-500">{pb.authStore.record.email}</p>
                                 </div>
                                 <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
