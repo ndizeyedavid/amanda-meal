@@ -14,3 +14,17 @@ html {
 .active#central {
   @apply bg-[#ea3030] text-white;
 }
+
+/* Spinning */
+#spin {
+  animation: spinning 1s linear infinite;
+}
+
+@keyframes spinning {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
