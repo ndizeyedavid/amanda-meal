@@ -12,6 +12,7 @@ import ErrorPage from "./pages/ErrorPage"
 import ConfirmOrder from "./pages/ConfirmOrder"
 import Orders from "./pages/Orders"
 import Start from "./pages/Start"
+import Filter from "./pages/Filter"
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/search" element={<Search />} />
         <Route path="/settings" element={<Settings />} />
+
+        {/* products filter */}
+        <Route path="/filter/:category" element={<Filter />} />
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

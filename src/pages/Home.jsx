@@ -77,7 +77,7 @@ export default function Home() {
 
                             <div className='flex items-center justify-between'>
                                 <h3 className='mb-4 text-3xl font-bold'>{category}</h3>
-                                <Link to={"/" + category} className='text-[#ff627f] text-xl'>See More</Link>
+                                <Link to={"/filter/" + category} className='text-[#ff627f] text-xl hover:underline'>See More</Link>
                             </div>
 
                             <div className='grid grid-cols-2 gap-y-5 gap-x-3'>

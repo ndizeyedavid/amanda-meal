@@ -3,7 +3,7 @@ export default function SingleCheckout({ img, title, price, quantity, total }) {
     return (
         <div className='flex flex-col gap-[13px] p-3 bg-white rounded-md shadow-[0px_6px_14px_-8px_rgba(0,0,0,0.25)]'>
             <div className='flex gap-3'>
-                <img src={img} className='w-[148px] h-[148px] rounded' alt={title} />
+                <img src={img} className='w-[148px] h-[148px] rounded object-cover' alt={title} />
 
                 {/* details */}
                 <div className='flex flex-col gap-5'>

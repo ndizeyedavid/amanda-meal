@@ -100,7 +100,7 @@ export default function ConfirmOrder() {
 
                 <div className='flex flex-col gap-1'>
                     <span className='text-[#f73658] font-semibold text-lg'>Total:</span>
-                    <span className='text-black font-bold text-[23px]'>{orderTotal} RWF</span>
+                    <span className='text-black font-bold text-[23px]'>{orderTotal.toLocaleString()} RWF</span>
                 </div>
 
                 <button onClick={() => submitOrder()} disabled={orders.length === 0} className='w-[150px] h-12 text-center text-white text-[20px] font-semibold bg-[#f73658] rounded-[5px]'>Checkout</button>

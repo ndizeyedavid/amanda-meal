@@ -55,7 +55,7 @@ export default function TopNav({ refreshCart, variation, title }) {
                     <img src={Logo} alt="Logo" className="w-[150px] h-[80px] object-contain" />
 
                     <div className="relative">
-                        <div onClick={() => setOpen(!open)} className="w-2 h-2 p-6 border-2 rounded-full shadow-lg hover:border-red-500" style={{ backgroundImage: "url('/assets/images/users/1.png')", backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
+                        <div onClick={() => setOpen(!open)} className="w-2 h-2 p-6 border-2 rounded-full shadow-lg hover:border-red-500" style={{ backgroundImage: `url('${pb.files.getURL(pb.authStore.record, pb.authStore.record.avatar)}')`, backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
 
                         {open &&
                             <div className="absolute right-0 z-50 w-48 py-2 mt-2 bg-white rounded-lg shadow-xl">
