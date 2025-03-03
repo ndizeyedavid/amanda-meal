@@ -40,28 +40,28 @@ export default function Signup() {
     return (
         <>
             <Toaster />
-            <section className='flex flex-col gap-[30px] w-[90%] mx-auto mt-[120px]'>
+            <section className='flex flex-col gap-[30px] w-[90%] h-screen mx-auto pt-[120px]'>
                 <h1 className='text-[50px] leading-[45px] font-bold'>Create an<br />Account</h1>
 
                 <form onSubmit={handleSubmit(registerUser)} className='flex flex-col gap-[40px]'>
-                    <div className='relative flex items-center bg-[#f3f3f3] h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
+                    <div className='relative flex items-center h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
                         <i className='absolute left-[8px] text-[#616161] text-[30px] bi bi-person-fill'></i>
                         <input disabled={loading} type="text" className='w-full text-[20px] outline-none h-full pl-[50px] bg-transparent' placeholder='Email' {...register("email")} />
                     </div>
 
-                    <div className='relative flex items-center bg-[#f3f3f3] h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
+                    <div className='relative flex items-center h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
                         <i className='absolute left-[8px] text-[#616161] text-[30px]  bi bi-lock-fill'></i>
                         <input disabled={loading} type="password" className='w-full text-[20px] outline-none h-full pl-[50px] bg-transparent' placeholder='Password' {...register("password")} />
                         <i className='absolute right-[10px] text-[#616161] text-[30px] bi bi-eye'></i>
                     </div>
 
-                    <div className='relative flex items-center bg-[#f3f3f3] h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
+                    <div className='relative flex items-center h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
                         <i className='absolute left-[8px] text-[#616161] text-[30px]  bi bi-lock-fill'></i>
                         <input disabled={loading} type="password" className='w-full text-[20px] outline-none h-full pl-[50px] bg-transparent' placeholder='Confirm Password' {...register("confirm_password")} />
                         <i className='absolute right-[10px] text-[#616161] text-[30px] bi bi-eye'></i>
                     </div>
 
-                    <span className='text-black/70 relative w-full bottom-2 text-[20px]'>By clicking the <span href="#" className='text-[#f73658]'>Create Account</span> button, you agree to the public offer</span>
+                    <span className=' relative w-full bottom-2 text-[20px]'>By clicking the <span href="#" className='text-[#f73658]'>Create Account</span> button, you agree to the public offer</span>
 
                     <button disabled={loading} className='relative bottom-3 w-[87%] text-white flex items-center justify-center rounded-lg text-[20px] font-semibold mx-auto h-[50px] bg-[#f73658] transition-all hover:bg-[#f73658]/80'>{!loading ? "Create Account" : "Loading..."}</button>
 

@@ -48,7 +48,7 @@ function Filter() {
             </div>
 
             {/* <PromoContainer /> */}
-            <section className='w-[95%] mx-auto mt-[35px] mb-[100px]'>
+            <section className='w-[95%] mx-auto mt-[35px] pb-[100px]'>
                 <div className='my-10'>
                     <div className='flex items-center justify-between'>
                         <h3 className='mb-4 text-3xl font-bold capitalize'>{category}</h3>

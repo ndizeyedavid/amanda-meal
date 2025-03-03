@@ -47,14 +47,16 @@ export default function Search() {
             <TopNav refreshCart={refreshCart} variation="simple" title="Search" />
             <SearchBar search={search} setSearch={setSearch} />
 
-            <div className='w-[95%] mx-auto mt-[35px] flex flex-col gap-5 mb-[100px]'>
-                {loading && <div className='flex items-center justify-center h-[700px]'><Loader color='red' id='spin' size={100} /></div>}
+            <div className='w-full h-screen'>
+                <div className='w-[95%] mx-auto mt-[35px] flex flex-col gap-5 pb-[100px]'>
+                    {loading && <div className='flex items-center justify-center h-[700px]'><Loader color='red' id='spin' size={100} /></div>}
 
-                {products.length == 0 && <Empty title="No products available" text="Check back later or try searching again." />}
+                    {products.length == 0 && <Empty title="No products available" text="Check back later or try searching again." />}
 
-                {products.map((data, index) => (
-                    <SingleProduct key={index} id={data.id} setRefreshCart={setRefreshCart} title={data.product_name} price={data.product_price} image={pb.files.getURL(data, data.product_image)} />
-                ))}
+                    {products.map((data, index) => (
+                        <SingleProduct key={index} id={data.id} setRefreshCart={setRefreshCart} title={data.product_name} price={data.product_price} image={pb.files.getURL(data, data.product_image)} />
+                    ))}
+                </div>
             </div>
 
             <BottomNav />

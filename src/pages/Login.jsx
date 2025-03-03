@@ -22,23 +22,23 @@ export default function Login() {
             toast.error("Access Denied", { id: "login" });
         } finally {
             setLoading(false);
-            reset();
+            // reset();
         }
     }
 
     return (
         <>
             <Toaster />
-            <section className='flex flex-col gap-[30px] w-[90%] mx-auto mt-[150px]'>
+            <section className='flex flex-col h-screen gap-[30px] w-[90%] mx-auto pt-[150px]'>
                 <h1 className='text-[50px] leading-[45px] font-bold'>Welcome<br />Back!</h1>
 
                 <form onSubmit={handleSubmit(login)} className='flex flex-col gap-[40px]'>
-                    <div className='relative flex items-center bg-[#f3f3f3] h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
+                    <div className='relative flex items-center h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
                         <i className='absolute left-[8px] text-[#616161] text-[30px] bi bi-person-fill'></i>
                         <input disabled={loading} type="text" className='w-full text-[20px] outline-none h-full pl-[50px] bg-transparent' placeholder='Email' {...register('email')} />
                     </div>
 
-                    <div className='relative flex items-center bg-[#f3f3f3] h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
+                    <div className='relative flex items-center h-[57px] border-2 border-[#b5b5b5] rounded-xl'>
                         <i className='absolute left-[8px] text-[#616161] text-[30px]  bi bi-lock-fill'></i>
                         <input disabled={loading} type="password" className='w-full text-[20px] outline-none h-full pl-[50px] bg-transparent' placeholder='Password' {...register("password")} />
                         <i className='absolute right-[10px] text-[#616161] text-[30px] bi bi-eye'></i>

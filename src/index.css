@@ -5,6 +5,11 @@
 body,
 html {
   background-color: #f9f9f9;
+  overflow-x: hidden;
+}
+
+body {
+  transition: 0.3s ease-in-out;
 }
 
 .active {
@@ -12,7 +17,8 @@ html {
 }
 
 .active#central {
-  @apply bg-[#ea3030] text-white;
+  background: #ea3030 !important;
+  color: white !important;
 }
 
 /* Spinning */
@@ -27,4 +33,44 @@ html {
   100% {
     rotate: 360deg;
   }
+}
+
+/* dark mode vs light mode */
+.dark {
+  background: #1f2020;
+  color: #fff;
+}
+
+.dark #root #bottom-nav {
+  background: #1f2020 !important;
+}
+
+#root #bottom-nav {
+  background: #f9f9f9;
+}
+
+.dark #root #bottom-nav #central {
+  background: #1f2020;
+}
+
+#root #bottom-nav #central {
+  background: #f9f9f9;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.dark #root #menu {
+  background: #1f2020 !important;
+}
+
+.dark #root #menu a,
+.dark #root #menu span {
+  color: white !important;
+}
+
+.dark #root #quantity {
+  background: #1f2020;
+}
+
+.dark #root #cart {
+  color: #1f2020;
 }

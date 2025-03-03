@@ -34,14 +34,14 @@ async function removeOrder(id, order_id, order, price, setDummy) {
 
 export default function SingleOrder({ id, img, title, status, quantity, price, setDummy, order_id }) {
     return (
-        <div className='relative flex flex-col gap-[13px] p-3 bg-white rounded-md shadow-[0px_6px_14px_-8px_rgba(0,0,0,0.25)]'>
+        <div className='relative flex border border-gray-600 flex-col gap-[13px] p-3 rounded-md shadow-[0px_6px_14px_-8px_rgba(0,0,0,0.25)]'>
             <Trash2 onClick={() => removeOrder(id, order_id, title, price, setDummy)} className="absolute p-1 overflow-visible text-red-500 rounded-full cursor-pointer right-4 top-3 hover:bg-red-100" size={40} />
             <div className='flex items-center gap-3'>
-                <img src={img} className='w-[128px] h-[158px] object-cover shadow-md rounded' width={158} height={148} alt="checkout Product image" />
+                <img src={img} className='w-[128px] h-[158px] object-cover shadow-md rounded aspect-square' width={158} height={148} alt="checkout Product image" />
 
                 {/* details */}
                 <div className='flex flex-col gap-5'>
-                    <h3 className='text-[23px] font-semibold leading-snug text-black'>{title}</h3>
+                    <h3 className='text-[23px] font-semibold leading-snug'>{title}</h3>
                     {renderStatus(status)}
                 </div>
 
@@ -50,8 +50,8 @@ export default function SingleOrder({ id, img, title, status, quantity, price, s
             <hr className='border border-[#bbbbbb] rounded-xl' />
 
             <div className='flex items-center justify-between'>
-                <span className='text-lg font-medium leading-snug text-black'>Total Order ({quantity}):</span>
-                <span className='text-xl font-bold leading-snug text-right text-black'>{price.toLocaleString()} RWF</span>
+                <span className='text-lg font-medium leading-snug'>Total Order ({quantity}):</span>
+                <span className='text-xl font-bold leading-snug text-right'>{price.toLocaleString()} RWF</span>
             </div>
             <button className="px-5 py-2 rounded-lg font-semibold text-[20px] bg-blue-400 hover:bg-blue-600 ">Track</button>
 

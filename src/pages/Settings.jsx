@@ -69,7 +69,7 @@ export default function Settings() {
             <Toaster />
             <TopNav variation="simple" title="Settings" />
 
-            <form onSubmit={handleSubmit(updateProfile)} className="mt-[35px] mb-[130px]">
+            <form onSubmit={handleSubmit(updateProfile)} className="mt-[35px] pb-[110px]">
                 <div className="relative flex items-center justify-center w-[150px] h-[150px] mx-auto">
                     <img className="object-cover w-full h-full rounded-full shadow-lg" src={avatar} alt="Profile image" width={150} height={150} />
                     <input id="profile_inp" type="file" onChange={handleAvatarChange} hidden />

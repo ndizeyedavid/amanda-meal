@@ -73,7 +73,7 @@ export default function Home() {
             {/* <ContentRedirecter /> */}
 
             {/* products */}
-            <section className='w-[95%] mx-auto mt-[35px] mb-[100px]'>
+            <section className='w-[95%] mx-auto mt-[35px] mb-[70px] pb-4'>
 
                 {Object.keys(groupedProducts).length === 0 ? (
                     <p>Loading...</p>
