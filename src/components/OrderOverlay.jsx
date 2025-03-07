@@ -38,23 +38,47 @@ export default function OrderOverlay({ id, title, unitPrice, close, setRefreshCa
     }
 
     async function addOrder(data) {
-        const orderDetails = {
-            user_id: pb.authStore.record.id,
-            product_id: [
-                id
-            ],
-            quantity: quantity,
-            price: quantity * unitPrice
-        }
 
         try {
             toast.loading("Adding order to cart", { id: "order" });
 
-            await pb.collection("orders").create(orderDetails);
+            // Check if the product exists for the user
+            const existingOrder = await pb.collection("orders").getFirstListItem(
+                `user_id="${pb.authStore.record.id}" && product_id="${id}"`
+            );
+
+            return console.log(existingOrder)
+
+            if (existingOrder) {
+                // Update the existing order quantity
+                const updatedQuantity = existingOrder.quantity + quantity;
+                await pb.collection("orders").update(existingOrder.id, {
+                    quantity: updatedQuantity,
+                    price: updatedQuantity * unitPrice
+                });
+            } else {
+                // Create a new order if it doesn't exist
+                await pb.collection("orders").create({
+                    user_id: pb.authStore.record.id,
+                    product_id: [id],
+                    quantity: quantity,
+                    price: quantity * unitPrice
+                });
+            }
 
             toast.success("Product Added To Cart", { id: "order" });
         } catch (err) {
-            toast.error("Failed to add order to cart", { id: "order" })
+            if (err.status === 404) {
+                await pb.collection("orders").create({
+                    user_id: pb.authStore.model.id,
+                    product_id: [id], // Ensure this matches your schema
+                    quantity: quantity,
+                    price: quantity * unitPrice
+                });
+            } else {
+                console.error("Error fetching order:", err);
+                toast.error("Failed to add order to cart", { id: "order" })
+            }
         } finally {
             close();
             setRefreshCart(Math.random())

@@ -54,6 +54,15 @@ export default function ConfirmOrder() {
                     checked_out: true,
                 });
 
+                // verify if order doesn't exist
+                // const verify_results = await pb.collection("checkout").getFullList({
+                //     filter: `user_id="${userId}"`
+                // })
+
+                // verify_results.forEach((order, index)=>{
+
+                // })
+
                 await pb.collection("checkout").create({
                     order_id: order.id,
                     status: "pending",
