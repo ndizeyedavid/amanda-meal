@@ -20,6 +20,7 @@ export default function TopNav({ refreshCart, variation, title, handleChangeThem
     }
 
     useEffect(() => {
+        
         async function fetch_data() {
             try {
                 const cart_orders = await pb.collection("orders").getFullList({
@@ -76,7 +77,9 @@ export default function TopNav({ refreshCart, variation, title, handleChangeThem
                     <img src={Logo} alt="Logo" className="w-[150px] h-[80px] object-contain" />
 
                     <div className="relative">
-                        <div onClick={() => setOpen(!open)} className="w-2 h-2 p-6 border-2 rounded-full shadow-lg hover:border-red-500" style={{ backgroundImage: `url('${pb.files.getURL(pb.authStore.record, pb.authStore.record.avatar)}')`, backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat" }} />
+                        <div onClick={() => setOpen(!open)} className="relative w-2 h-2 p-6 overflow-hidden border-2 rounded-full shadow-lg hover:border-red-500">
+                            <img src={pb.files.getURL(pb.authStore.record, pb.authStore.record.avatar)} width={500} height={500} alt="profile" className="absolute top-0 right-0 object-cover w-full h-full" />
+                        </div>
 
                         {open &&
                             <div id="menu" className="absolute right-0 z-50 w-48 py-2 mt-2 bg-white rounded-lg shadow-xl">
