@@ -12,6 +12,7 @@ export default function ConfirmOrder() {
 
     const [orders, setOrders] = useState([]);
     const [orderTotal, setOrderTotal] = useState(0);
+    const [loading, setLoading] = useState(true);
     const [dummy, setDummy] = useState(0);
     useEffect(() => {
 
@@ -41,6 +42,7 @@ export default function ConfirmOrder() {
 
     async function submitOrder() {
         toast.loading("Proceding to checkout", { id: "checkout" });
+        setLoading(true);
         try {
 
             const userId = pb.authStore.record.id;
@@ -74,9 +76,12 @@ export default function ConfirmOrder() {
         } catch (err) {
             toast.error("Failed to proceed to checkout", { id: "checkout" })
         } finally {
+            setLoading(false);
             setDummy(Math.random())
         }
     }
+
+    // console.log(orders)
 
     return (
         <>
@@ -99,9 +104,14 @@ export default function ConfirmOrder() {
             <div className='flex flex-col gap-[10px] w-[95%] mx-auto mt-[35px]'>
                 <h3 className='flex items-center gap-2 text-xl font-semibold leading-snug '>Shopping List</h3>
                 {orders.length === 0 && <Empty title="Cart empty" text="Try adding menu items to cart" />}
-                {orders.map((data, index) => (
-                    <SingleCheckout key={index} img={pb.files.getURL(data.expand.product_id[0], data.expand.product_id[0].product_image)} title={data.expand.product_id[0].product_name} price={data.expand.product_id[0].product_price} quantity={data.quantity} total={data.price} />
-                ))}
+                {loading ? 
+                    orders.map((data, index) => (
+                        <SingleCheckout key={index} img={pb.files.getURL(data.expand.product_id, data.expand.product_id.product_image)} title={console.log(data.expand.product_id.product_name)} price={data.expand.product_id.product_price} quantity={data.quantity} total={data.price} />
+                    ))
+
+                :
+                    <p>loading...</p>
+                }
 
             </div>
 
